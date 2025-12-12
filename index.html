@@ -1,96 +1,153 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mehedi Hossen Fahim - Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* --- RESET & BASE --- */
+    /* --- RESET --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #0f111a;
+      background: #0f111a;
       color: #f0f0f0;
       line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
     }
-    a { color: inherit; text-decoration: none; transition: 0.2s; }
-    a:hover { color: #1f8ef1; }
+
+    /* --- THEME --- */
+    body.light { background: #f7f8fa; color: #1a1a1a; }
+    body.light .project { background: #fff; color: #111; }
+    body.light .timeline-item { background: #fff; color: #111; }
 
     /* --- CONTAINER --- */
-    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
 
     /* --- HEADER --- */
-    header { text-align: center; margin-bottom: 3rem; }
-    header h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 0.5rem; color: #ffffff; }
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg,#1f8ef1,#f72585);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
     header p { font-size: 1rem; color: #bbbbbb; }
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #1f8ef1;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .theme-toggle:hover { background: #f72585; }
+
+    /* --- NAVIGATION --- */
+    nav { text-align: center; margin-bottom: 2rem; }
+    nav a {
+      margin: 0 1rem;
+      font-weight: 600;
+      color: #1f8ef1;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #f72585; }
 
     /* --- SECTION TITLES --- */
-    h2 { font-size: 1.75rem; font-weight: 600; margin: 2rem 0 1rem; border-bottom: 2px solid #333; padding-bottom: 0.5rem; }
+    h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem;
+      border-bottom: 2px solid #333;
+      padding-bottom: 0.5rem;
+    }
+    body.light h2 { border-color: #ccc; }
 
     /* --- SKILLS --- */
-    .skills { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
+    .skills { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; justify-content: center; }
     .skill {
       background: #1a1c2b;
-      padding: 0.4rem 0.8rem;
-      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
       font-weight: 500;
-      font-size: 0.9rem;
-      transition: transform 0.2s, background 0.2s;
+      font-size: 0.95rem;
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
     }
-    .skill:hover { transform: translateY(-3px); background: #1f8ef1; color: #fff; }
+    .skill:hover { transform: scale(1.1); background: #f72585; color: #fff; }
+    body.light .skill { background: #ddd; color: #111; }
+    body.light .skill:hover { background: #1f8ef1; color: #fff; }
 
     /* --- PROJECTS --- */
     .projects { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 1rem; }
     .project {
       position: relative;
       overflow: hidden;
-      border-radius: 12px;
+      border-radius: 16px;
       cursor: pointer;
       background: #1a1c2b;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      transition: transform 0.3s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      transition: transform 0.4s, box-shadow 0.4s;
     }
-    .project:hover { transform: translateY(-5px); }
-    .project img { width: 100%; height: 200px; object-fit: cover; filter: brightness(0.8); transition: transform 0.3s; }
-    .project:hover img { transform: scale(1.05); }
+    .project:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0,0,0,0.7); }
+    .project img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      filter: brightness(0.85);
+      transition: transform 0.5s, filter 0.5s;
+    }
+    .project:hover img { transform: scale(1.05); filter: brightness(1); }
     .project-content {
-      padding: 1rem;
+      padding: 1rem 1.5rem;
     }
-    .project-content h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #fff; }
-    .project-content p { font-size: 0.95rem; color: #ccc; margin-bottom: 0.5rem; }
-    .project-content a {
-      font-size: 0.9rem;
-      color: #1f8ef1;
-      font-weight: 500;
-    }
+    .project-content h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; background: linear-gradient(90deg,#f72585,#1f8ef1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .project-content p { font-size: 1rem; color: #ccc; margin-bottom: 0.5rem; }
+    .project-content a { font-size: 0.95rem; color: #1f8ef1; font-weight: 600; transition: color 0.3s; }
+    .project-content a:hover { color: #f72585; }
+
+    body.light .project { background: #fff; color: #111; }
+    body.light .project-content p { color: #555; }
 
     /* --- EXPERIENCE & EDUCATION --- */
     .timeline { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem; }
     .timeline-item {
       background: #1a1c2b;
       padding: 1rem 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-      transition: transform 0.2s;
+      border-radius: 16px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .timeline-item:hover { transform: translateY(-3px); }
-    .timeline-item h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; color: #fff; }
+    .timeline-item:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.7); }
+    .timeline-item h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.25rem; }
     .timeline-item span { font-size: 0.85rem; color: #aaa; }
-    .timeline-item p { font-size: 0.9rem; color: #ccc; margin-top: 0.5rem; }
+    .timeline-item p { font-size: 0.95rem; color: #ccc; margin-top: 0.5rem; }
+
+    body.light .timeline-item { background: #fff; color: #111; }
+    body.light .timeline-item p, body.light .timeline-item span { color: #555; }
 
     /* --- CONTACT --- */
     .contact { text-align: center; margin-top: 3rem; }
-    .contact a { margin: 0 0.5rem; font-weight: 600; color: #1f8ef1; }
+    .contact a { margin: 0 0.75rem; font-weight: 600; color: #1f8ef1; transition: color 0.3s; }
+    .contact a:hover { color: #f72585; }
 
     /* --- FOOTER --- */
     footer { text-align: center; padding: 2rem 0; font-size: 0.85rem; color: #666; }
 
     /* --- MEDIA QUERIES --- */
-    @media(min-width: 768px) {
-      .projects { grid-template-columns: 1fr 1fr; }
-    }
+    @media(min-width: 768px) { .projects { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
@@ -103,10 +160,20 @@
       <p>
         <a href="mailto:mehdihossenfahim@gmail.com">mehdihossenfahim@gmail.com</a> | +880 1567-892416
       </p>
+      <button class="theme-toggle">Toggle Theme</button>
     </header>
 
+    <!-- NAVIGATION -->
+    <nav>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
     <!-- SKILLS -->
-    <section>
+    <section id="skills">
       <h2>Skills</h2>
       <div class="skills">
         <div class="skill">C#</div>
@@ -123,11 +190,11 @@
     </section>
 
     <!-- PROJECTS -->
-    <section>
+    <section id="projects">
       <h2>Projects</h2>
       <div class="projects">
         <div class="project">
-          <img src="https://via.placeholder.com/400x200" alt="Mini ERP Screenshot">
+          <img src="https://via.placeholder.com/500x300" alt="Mini ERP Screenshot">
           <div class="project-content">
             <h3>Mini ERP / Transaction System</h3>
             <p>Small-scale ERP system to manage sales, inventory, and employees. Built with Python (Django) and SQLite.</p>
@@ -135,15 +202,15 @@
           </div>
         </div>
         <div class="project">
-          <img src="https://via.placeholder.com/400x200" alt="EduBuddy Screenshot">
+          <img src="https://via.placeholder.com/500x300" alt="EduBuddy Screenshot">
           <div class="project-content">
-            <h3>EduBuddy – AI-Enhanced Learning</h3>
+            <h3>EduBuddy – AI Learning Platform</h3>
             <p>Backend platform with 8+ REST APIs for content generation and progress tracking. ASP.NET & FastAPI, PostgreSQL.</p>
             <a href="#">View on GitHub</a>
           </div>
         </div>
         <div class="project">
-          <img src="https://via.placeholder.com/400x200" alt="IoT Health Monitoring Screenshot">
+          <img src="https://via.placeholder.com/500x300" alt="IoT Health Monitoring Screenshot">
           <div class="project-content">
             <h3>IoT Health Monitoring System</h3>
             <p>ESP32-based vitals tracker (pulse, temperature, movement) with cloud connectivity.</p>
@@ -154,7 +221,7 @@
     </section>
 
     <!-- EXPERIENCE -->
-    <section>
+    <section id="experience">
       <h2>Experience</h2>
       <div class="timeline">
         <div class="timeline-item">
@@ -171,7 +238,7 @@
     </section>
 
     <!-- EDUCATION -->
-    <section>
+    <section id="education">
       <h2>Education</h2>
       <div class="timeline">
         <div class="timeline-item">
@@ -182,13 +249,13 @@
     </section>
 
     <!-- CONTACT -->
-    <section class="contact">
+    <section id="contact">
       <h2>Contact</h2>
-      <p>
+      <div class="contact">
         <a href="mailto:mehdihossenfahim@gmail.com">Email Me</a> | 
         <a href="#">GitHub</a> | 
         <a href="#">LinkedIn</a>
-      </p>
+      </div>
     </section>
 
     <!-- FOOTER -->
@@ -196,6 +263,22 @@
       &copy; 2025 Mehedi Hossen Fahim. All rights reserved.
     </footer>
   </div>
+
+  <script>
+    // Smooth scroll for nav links
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Theme toggle
+    const themeBtn = document.querySelector('.theme-toggle');
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+    });
+  </script>
 
 </body>
 </html>
