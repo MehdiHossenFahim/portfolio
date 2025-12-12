@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,48 +9,83 @@
   <style>
     /* --- RESET & BASE --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background-color: #f7f8fa; color: #1a1a1a; line-height: 1.6; }
-
-    a { color: inherit; text-decoration: none; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f111a;
+      color: #f0f0f0;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; transition: 0.2s; }
+    a:hover { color: #1f8ef1; }
 
     /* --- CONTAINER --- */
     .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
 
     /* --- HEADER --- */
     header { text-align: center; margin-bottom: 3rem; }
-    header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
-    header p { font-size: 1rem; color: #555; }
+    header h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 0.5rem; color: #ffffff; }
+    header p { font-size: 1rem; color: #bbbbbb; }
 
     /* --- SECTION TITLES --- */
-    h2 { font-size: 1.75rem; font-weight: 600; margin: 2rem 0 1rem; border-bottom: 2px solid #ddd; padding-bottom: 0.5rem; }
+    h2 { font-size: 1.75rem; font-weight: 600; margin: 2rem 0 1rem; border-bottom: 2px solid #333; padding-bottom: 0.5rem; }
 
     /* --- SKILLS --- */
     .skills { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
-    .skill { background: #e0e0e0; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 500; font-size: 0.9rem; transition: all 0.2s; }
-    .skill:hover { background: #c4c4c4; }
+    .skill {
+      background: #1a1c2b;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .skill:hover { transform: translateY(-3px); background: #1f8ef1; color: #fff; }
 
     /* --- PROJECTS --- */
     .projects { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 1rem; }
-    .project { background: #fff; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s; }
+    .project {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #1a1c2b;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
     .project:hover { transform: translateY(-5px); }
-    .project img { width: 100%; border-radius: 8px; margin-bottom: 1rem; }
-    .project h3 { font-size: 1.25rem; margin-bottom: 0.5rem; font-weight: 600; }
-    .project p { font-size: 0.95rem; color: #555; margin-bottom: 0.5rem; }
-    .project a { font-size: 0.9rem; color: #1a73e8; font-weight: 500; }
+    .project img { width: 100%; height: 200px; object-fit: cover; filter: brightness(0.8); transition: transform 0.3s; }
+    .project:hover img { transform: scale(1.05); }
+    .project-content {
+      padding: 1rem;
+    }
+    .project-content h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #fff; }
+    .project-content p { font-size: 0.95rem; color: #ccc; margin-bottom: 0.5rem; }
+    .project-content a {
+      font-size: 0.9rem;
+      color: #1f8ef1;
+      font-weight: 500;
+    }
 
     /* --- EXPERIENCE & EDUCATION --- */
     .timeline { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem; }
-    .timeline-item { background: #fff; padding: 1rem 1.5rem; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
-    .timeline-item h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
-    .timeline-item span { font-size: 0.85rem; color: #777; }
-    .timeline-item p { font-size: 0.9rem; color: #555; margin-top: 0.5rem; }
+    .timeline-item {
+      background: #1a1c2b;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+    .timeline-item:hover { transform: translateY(-3px); }
+    .timeline-item h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; color: #fff; }
+    .timeline-item span { font-size: 0.85rem; color: #aaa; }
+    .timeline-item p { font-size: 0.9rem; color: #ccc; margin-top: 0.5rem; }
 
     /* --- CONTACT --- */
     .contact { text-align: center; margin-top: 3rem; }
-    .contact a { margin: 0 0.5rem; font-weight: 600; color: #1a73e8; }
+    .contact a { margin: 0 0.5rem; font-weight: 600; color: #1f8ef1; }
 
     /* --- FOOTER --- */
-    footer { text-align: center; padding: 2rem 0; font-size: 0.85rem; color: #aaa; }
+    footer { text-align: center; padding: 2rem 0; font-size: 0.85rem; color: #666; }
 
     /* --- MEDIA QUERIES --- */
     @media(min-width: 768px) {
@@ -92,21 +128,27 @@
       <div class="projects">
         <div class="project">
           <img src="https://via.placeholder.com/400x200" alt="Mini ERP Screenshot">
-          <h3>Mini ERP / Transaction System</h3>
-          <p>Small-scale ERP system to manage sales, inventory, and employees. Built with Python (Django) and SQLite.</p>
-          <a href="#">View on GitHub</a>
+          <div class="project-content">
+            <h3>Mini ERP / Transaction System</h3>
+            <p>Small-scale ERP system to manage sales, inventory, and employees. Built with Python (Django) and SQLite.</p>
+            <a href="#">View on GitHub</a>
+          </div>
         </div>
         <div class="project">
           <img src="https://via.placeholder.com/400x200" alt="EduBuddy Screenshot">
-          <h3>EduBuddy – AI-Enhanced Learning</h3>
-          <p>Backend platform with 8+ REST APIs for content generation and progress tracking. ASP.NET & FastAPI, PostgreSQL.</p>
-          <a href="#">View on GitHub</a>
+          <div class="project-content">
+            <h3>EduBuddy – AI-Enhanced Learning</h3>
+            <p>Backend platform with 8+ REST APIs for content generation and progress tracking. ASP.NET & FastAPI, PostgreSQL.</p>
+            <a href="#">View on GitHub</a>
+          </div>
         </div>
         <div class="project">
           <img src="https://via.placeholder.com/400x200" alt="IoT Health Monitoring Screenshot">
-          <h3>IoT Health Monitoring System</h3>
-          <p>ESP32-based vitals tracker (pulse, temperature, movement) with cloud connectivity.</p>
-          <a href="#">View on GitHub</a>
+          <div class="project-content">
+            <h3>IoT Health Monitoring System</h3>
+            <p>ESP32-based vitals tracker (pulse, temperature, movement) with cloud connectivity.</p>
+            <a href="#">View on GitHub</a>
+          </div>
         </div>
       </div>
     </section>
@@ -154,16 +196,6 @@
       &copy; 2025 Mehedi Hossen Fahim. All rights reserved.
     </footer>
   </div>
-
-  <script>
-    // Simple smooth scroll for anchors (optional)
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  </script>
 
 </body>
 </html>
