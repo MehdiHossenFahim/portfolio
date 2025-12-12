@@ -14,34 +14,12 @@
       background: #0f111a;
       color: #f0f0f0;
       line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
     }
 
-    /* --- THEME --- */
-    body.light { background: #f7f8fa; color: #1a1a1a; }
-    body.light .project { background: #fff; color: #111; }
-    body.light .timeline-item { background: #fff; color: #111; }
-
-    /* --- CONTAINER --- */
-    .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
-
-    /* --- HEADER --- */
-    header {
-      text-align: center;
-      margin-bottom: 3rem;
-      position: relative;
-    }
-    header h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(90deg,#1f8ef1,#f72585);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    header p { font-size: 1rem; color: #bbbbbb; }
+    /* --- THEME BUTTON --- */
     .theme-toggle {
-      position: absolute;
+      position: fixed;
       top: 1rem;
       right: 1rem;
       background: #1f8ef1;
@@ -52,31 +30,71 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s;
+      z-index: 1000;
     }
     .theme-toggle:hover { background: #f72585; }
 
-    /* --- NAVIGATION --- */
-    nav { text-align: center; margin-bottom: 2rem; }
-    nav a {
-      margin: 0 1rem;
-      font-weight: 600;
-      color: #1f8ef1;
-      transition: color 0.3s;
+    /* --- HERO --- */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      text-align: center;
+      padding: 0 2rem;
+      position: relative;
+      background: linear-gradient(135deg, #1f8ef1 0%, #f72585 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
     }
-    nav a:hover { color: #f72585; }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(90deg,#ffffff,#f0f0f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      animation: fadeIn 1.5s ease forwards;
+    }
+    .hero .typing {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 2rem;
+      height: 1.5rem;
+    }
+    .hero a {
+      padding: 0.75rem 2rem;
+      background: #fff;
+      color: #1f8ef1;
+      font-weight: 600;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .hero a:hover { background: #f72585; color: #fff; }
 
-    /* --- SECTION TITLES --- */
+    /* --- SECTIONS --- */
+    section { padding: 4rem 2rem; max-width: 1000px; margin: 0 auto; }
     h2 {
       font-size: 2rem;
       font-weight: 600;
-      margin: 2rem 0 1rem;
-      border-bottom: 2px solid #333;
-      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+      position: relative;
     }
-    body.light h2 { border-color: #ccc; }
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: #1f8ef1;
+      border-radius: 2px;
+    }
 
     /* --- SKILLS --- */
-    .skills { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; justify-content: center; }
+    .skills { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
     .skill {
       background: #1a1c2b;
       padding: 0.5rem 1rem;
@@ -87,42 +105,47 @@
       cursor: pointer;
     }
     .skill:hover { transform: scale(1.1); background: #f72585; color: #fff; }
-    body.light .skill { background: #ddd; color: #111; }
-    body.light .skill:hover { background: #1f8ef1; color: #fff; }
 
-    /* --- PROJECTS --- */
-    .projects { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 1rem; }
-    .project {
+    /* --- PROJECT --- */
+    .project-card {
       position: relative;
       overflow: hidden;
-      border-radius: 16px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      transition: transform 0.4s, box-shadow 0.4s;
       cursor: pointer;
       background: #1a1c2b;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      transition: transform 0.4s, box-shadow 0.4s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
-    .project:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0,0,0,0.7); }
-    .project img {
+    .project-card:hover { transform: translateY(-10px); box-shadow: 0 15px 50px rgba(0,0,0,0.7); }
+    .project-card img {
       width: 100%;
-      height: 220px;
+      max-width: 600px;
+      height: 300px;
       object-fit: cover;
       filter: brightness(0.85);
       transition: transform 0.5s, filter 0.5s;
+      border-radius: 20px 20px 0 0;
     }
-    .project:hover img { transform: scale(1.05); filter: brightness(1); }
+    .project-card:hover img { transform: scale(1.05); filter: brightness(1); }
     .project-content {
-      padding: 1rem 1.5rem;
+      padding: 1.5rem;
     }
-    .project-content h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; background: linear-gradient(90deg,#f72585,#1f8ef1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .project-content p { font-size: 1rem; color: #ccc; margin-bottom: 0.5rem; }
-    .project-content a { font-size: 0.95rem; color: #1f8ef1; font-weight: 600; transition: color 0.3s; }
-    .project-content a:hover { color: #f72585; }
-
-    body.light .project { background: #fff; color: #111; }
-    body.light .project-content p { color: #555; }
+    .project-content h3 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg,#f72585,#1f8ef1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .project-content p { font-size: 1rem; color: #ccc; line-height: 1.5; }
 
     /* --- EXPERIENCE & EDUCATION --- */
-    .timeline { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem; }
+    .timeline { display: flex; flex-direction: column; gap: 1.5rem; }
     .timeline-item {
       background: #1a1c2b;
       padding: 1rem 1.5rem;
@@ -135,9 +158,6 @@
     .timeline-item span { font-size: 0.85rem; color: #aaa; }
     .timeline-item p { font-size: 0.95rem; color: #ccc; margin-top: 0.5rem; }
 
-    body.light .timeline-item { background: #fff; color: #111; }
-    body.light .timeline-item p, body.light .timeline-item span { color: #555; }
-
     /* --- CONTACT --- */
     .contact { text-align: center; margin-top: 3rem; }
     .contact a { margin: 0 0.75rem; font-weight: 600; color: #1f8ef1; transition: color 0.3s; }
@@ -146,139 +166,114 @@
     /* --- FOOTER --- */
     footer { text-align: center; padding: 2rem 0; font-size: 0.85rem; color: #666; }
 
+    /* --- ANIMATIONS --- */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* --- MEDIA QUERIES --- */
-    @media(min-width: 768px) { .projects { grid-template-columns: 1fr 1fr; } }
+    @media(max-width: 768px) { .hero h1 { font-size: 2.5rem; } .project-card img { height: 220px; } }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <!-- HEADER -->
-    <header>
-      <h1>Mehedi Hossen Fahim</h1>
-      <p>Software Developer | Backend & Full-Stack | IoT & Web Solutions</p>
-      <p>
-        <a href="mailto:mehdihossenfahim@gmail.com">mehdihossenfahim@gmail.com</a> | +880 1567-892416
-      </p>
-      <button class="theme-toggle">Toggle Theme</button>
-    </header>
+  <button class="theme-toggle">Toggle Theme</button>
 
-    <!-- NAVIGATION -->
-    <nav>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Hello, I'm Mehedi Fahim</h1>
+    <div class="typing"></div>
+    <a href="https://edubuddy-web.onrender.com/" target="_blank">View EduBuddy</a>
+  </section>
 
-    <!-- SKILLS -->
-    <section id="skills">
-      <h2>Skills</h2>
-      <div class="skills">
-        <div class="skill">C#</div>
-        <div class="skill">Python</div>
-        <div class="skill">Java</div>
-        <div class="skill">ASP.NET Core</div>
-        <div class="skill">FastAPI</div>
-        <div class="skill">PostgreSQL</div>
-        <div class="skill">MySQL</div>
-        <div class="skill">REST API</div>
-        <div class="skill">Docker</div>
-        <div class="skill">Git</div>
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill">C#</div>
+      <div class="skill">Python</div>
+      <div class="skill">Java</div>
+      <div class="skill">ASP.NET Core</div>
+      <div class="skill">FastAPI</div>
+      <div class="skill">PostgreSQL</div>
+      <div class="skill">MySQL</div>
+      <div class="skill">REST API</div>
+      <div class="skill">Docker</div>
+      <div class="skill">Git</div>
+    </div>
+  </section>
+
+  <!-- PROJECT -->
+  <section id="projects">
+    <h2>Featured Project</h2>
+    <div class="project-card">
+      <img src="https://via.placeholder.com/800x400.png?text=EduBuddy+Screenshot" alt="EduBuddy">
+      <div class="project-content">
+        <h3>EduBuddy – AI Learning Platform</h3>
+        <p>EduBuddy is an AI-enhanced learning platform that provides content generation, progress tracking, and personalized learning experiences. Built with ASP.NET, FastAPI, and PostgreSQL.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PROJECTS -->
-    <section id="projects">
-      <h2>Projects</h2>
-      <div class="projects">
-        <div class="project">
-          <img src="https://via.placeholder.com/500x300" alt="Mini ERP Screenshot">
-          <div class="project-content">
-            <h3>Mini ERP / Transaction System</h3>
-            <p>Small-scale ERP system to manage sales, inventory, and employees. Built with Python (Django) and SQLite.</p>
-            <a href="#">View on GitHub</a>
-          </div>
-        </div>
-        <div class="project">
-          <img src="https://via.placeholder.com/500x300" alt="EduBuddy Screenshot">
-          <div class="project-content">
-            <h3>EduBuddy – AI Learning Platform</h3>
-            <p>Backend platform with 8+ REST APIs for content generation and progress tracking. ASP.NET & FastAPI, PostgreSQL.</p>
-            <a href="#">View on GitHub</a>
-          </div>
-        </div>
-        <div class="project">
-          <img src="https://via.placeholder.com/500x300" alt="IoT Health Monitoring Screenshot">
-          <div class="project-content">
-            <h3>IoT Health Monitoring System</h3>
-            <p>ESP32-based vitals tracker (pulse, temperature, movement) with cloud connectivity.</p>
-            <a href="#">View on GitHub</a>
-          </div>
-        </div>
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>Software Developer Intern – White Services Technology Ltd.</h3>
+        <span>Jul 2025 – Sep 2025 | Dhaka, Bangladesh</span>
+        <p>Developed backend modules and optimized PostgreSQL queries, improving page performance by 30% and reducing API latency by 22%.</p>
       </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience">
-      <h2>Experience</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <h3>Software Developer Intern – White Services Technology Ltd.</h3>
-          <span>Jul 2025 – Sep 2025 | Dhaka, Bangladesh</span>
-          <p>Developed backend modules and optimized PostgreSQL queries, improving page performance by 30% and reducing API latency by 22%.</p>
-        </div>
-        <div class="timeline-item">
-          <h3>Arduino & Robotics Instructor – Motijheel Model High School</h3>
-          <span>Feb 2024 – Apr 2024 | Dhaka, Bangladesh</span>
-          <p>Taught 50+ students robotics fundamentals, supervised 8+ projects, enhancing understanding of embedded systems.</p>
-        </div>
+      <div class="timeline-item">
+        <h3>Arduino & Robotics Instructor – Motijheel Model High School</h3>
+        <span>Feb 2024 – Apr 2024 | Dhaka, Bangladesh</span>
+        <p>Taught 50+ students robotics fundamentals, supervised 8+ projects, enhancing understanding of embedded systems.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- EDUCATION -->
-    <section id="education">
-      <h2>Education</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <h3>BSc in Computer Science & Engineering – Notre Dame University Bangladesh</h3>
-          <span>2021 – Present | CGPA: 3.52</span>
-        </div>
+  <!-- EDUCATION -->
+  <section id="education">
+    <h2>Education</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>BSc in Computer Science & Engineering – Notre Dame University Bangladesh</h3>
+        <span>2021 – Present | CGPA: 3.52</span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CONTACT -->
-    <section id="contact">
-      <h2>Contact</h2>
-      <div class="contact">
-        <a href="mailto:mehdihossenfahim@gmail.com">Email Me</a> | 
-        <a href="#">GitHub</a> | 
-        <a href="#">LinkedIn</a>
-      </div>
-    </section>
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact">
+      <a href="mailto:mehdihossenfahim@gmail.com">Email Me</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </section>
 
-    <!-- FOOTER -->
-    <footer>
-      &copy; 2025 Mehedi Hossen Fahim. All rights reserved.
-    </footer>
-  </div>
+  <footer>&copy; 2025 Mehedi Hossen Fahim. All rights reserved.</footer>
 
+  <!-- JS Animations -->
   <script>
-    // Smooth scroll for nav links
-    document.querySelectorAll('nav a').forEach(anchor => {
-      anchor.addEventListener('click', e => {
-        e.preventDefault();
-        document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-      });
-    });
+    // Typing effect
+    const typingText = "I build AI-enhanced learning platforms and web applications.";
+    const typingEl = document.querySelector('.typing');
+    let i = 0;
+    function type() {
+      if(i < typingText.length){
+        typingEl.textContent += typingText.charAt(i);
+        i++;
+        setTimeout(type, 60);
+      }
+    }
+    type();
 
     // Theme toggle
     const themeBtn = document.querySelector('.theme-toggle');
-    themeBtn.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-    });
+    themeBtn.addEventListener('click', () => document.body.classList.toggle('light'));
   </script>
-
 </body>
 </html>
+
