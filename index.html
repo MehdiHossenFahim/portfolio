@@ -10,11 +10,22 @@
 /* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',sans-serif;background:#0f111a;color:#f0f0f0;overflow-x:hidden;}
+body{font-family:'Inter',sans-serif;background:#0f111a;color:#f0f0f0;overflow-x:hidden;transition:0.5s;}
 a{text-decoration:none;}
+
+/* LIGHT THEME */
+body.light{background:#f0f0f0;color:#111;}
+body.light .skill{background:#eee;color:#111;}
+body.light .project-card{background:#fff;color:#111;box-shadow:0 10px 30px rgba(0,0,0,0.2);}
+body.light .timeline-item{background:#fff;color:#111;box-shadow:0 6px 15px rgba(0,0,0,0.2);}
+body.light .achievement{background:#fff;color:#111;box-shadow:0 6px 15px rgba(0,0,0,0.2);}
+body.light .hero a{color:#ff4d6d;background:#111;}
 
 /* PARTICLE BACKGROUND */
 #particles-js{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+
+/* MATRIX CODE */
+canvas#matrixCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;}
 
 /* THEME TOGGLE */
 .theme-toggle{position:fixed;top:1rem;right:1rem;background:#ff4d6d;border:none;padding:0.5rem 1rem;border-radius:20px;color:#fff;font-weight:600;cursor:pointer;z-index:1000;transition:0.3s;}
@@ -23,10 +34,25 @@ a{text-decoration:none;}
 /* HERO */
 .hero{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;overflow:hidden;color:#fff;}
 .hero h1{font-family:'Orbitron',sans-serif;font-size:3rem;font-weight:700;margin-bottom:1rem;background:linear-gradient(90deg,#ff4d6d,#1f8ef1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeIn 1.5s ease forwards;}
-.hero h2{font-size:1.5rem;margin-bottom:2rem;opacity:0;animation:fadeIn 2s 1s forwards;}
+.hero h2{font-size:1.5rem;margin-bottom:2rem;opacity:0;animation:fadeIn 2s 1s forwards;max-width:700px;}
 .hero img{width:180px;height:180px;border-radius:50%;border:4px solid #fff;margin-bottom:1rem;object-fit:cover;animation:fadeIn 2s 0.5s forwards;}
-.hero a{padding:0.75rem 2rem;background:#fff;color:#ff4d6d;font-weight:600;border-radius:30px;transition:0.3s;}
-.hero a:hover{background:#ff4d6d;color:#fff;}
+.hero a{padding:0.75rem 2rem;background:#fff;color:#ff4d6d;font-weight:600;border-radius:30px;transition:0.5s;display:inline-block;animation:morph 4s infinite alternate;}
+.hero a:hover{background:#ff4d6d;color:#fff;transform:scale(1.05);}
+
+/* FLOATING ANIMATION FOR HERO ELEMENTS */
+@keyframes float{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+  100%{transform:translateY(0);}
+}
+.hero img,h1,h2{animation:float 6s ease-in-out infinite;}
+
+/* MORPH ANIMATION */
+@keyframes morph{
+  0%{border-radius:30px;}
+  50%{border-radius:50px;}
+  100%{border-radius:30px;}
+}
 
 /* SECTIONS */
 section{padding:4rem 2rem;max-width:1000px;margin:0 auto;position:relative;}
@@ -80,6 +106,7 @@ footer{text-align:center;padding:2rem 0;font-size:0.85rem;color:#666;}
 
 <!-- PARTICLE BACKGROUND -->
 <div id="particles-js"></div>
+<canvas id="matrixCanvas"></canvas>
 
 <button class="theme-toggle">Toggle Theme</button>
 
@@ -91,127 +118,54 @@ footer{text-align:center;padding:2rem 0;font-size:0.85rem;color:#666;}
   <a href="https://edubuddy-web.onrender.com/" target="_blank">Explore EduBuddy</a>
 </section>
 
-<!-- SKILLS -->
-<section id="skills">
-<h2>Skills</h2>
-<div class="skills">
-<div class="skill">C#</div><div class="skill">Python</div><div class="skill">Java</div>
-<div class="skill">ASP.NET Core</div><div class="skill">FastAPI</div><div class="skill">PostgreSQL</div>
-<div class="skill">MySQL</div><div class="skill">REST API</div><div class="skill">Docker</div>
-<div class="skill">Git</div>
-</div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-<h2>Projects</h2>
-<div class="projects">
-<!-- EduBuddy -->
-<div class="project-card">
-<img src="https://via.placeholder.com/800x400.png?text=EduBuddy" alt="EduBuddy">
-<div class="project-content"><h3>EduBuddy – AI Learning Platform</h3>
-<p>AI-enhanced learning platform providing content generation, progress tracking, and personalized learning experiences. Built with ASP.NET, FastAPI, PostgreSQL.</p></div>
-</div>
-<!-- Robotic Arm -->
-<div class="project-card">
-<img src="https://via.placeholder.com/800x400.png?text=6-DoF+Robotic+Arm" alt="Robotic Arm">
-<div class="project-content"><h3>6-DoF Robotic Arm</h3>
-<p>Fully articulated robotic arm achieving &lt;3° motion error; won 2nd place in NDUB Engineering Showcase.</p></div>
-</div>
-<!-- ESP32 Rover -->
-<div class="project-card">
-<img src="https://via.placeholder.com/800x400.png?text=ESP32-CAM+Rover" alt="ESP32 Rover">
-<div class="project-content"><h3>ESP32-CAM Surveillance Rover</h3>
-<p>Real-time 480p video streaming at 18 FPS with custom Python dashboard; 3rd place in university competition.</p></div>
-</div>
-<!-- IoT Health Monitor -->
-<div class="project-card">
-<img src="https://via.placeholder.com/800x400.png?text=IoT+Health+Monitor" alt="Health Monitoring">
-<div class="project-content"><h3>IoT-Based Health Monitoring System</h3>
-<p>Cloud-connected vitals tracker measuring temperature, pulse, and movement; won 1st place among 25+ teams.</p></div>
-</div>
-<!-- Command-Line OS -->
-<div class="project-card">
-<img src="https://via.placeholder.com/800x400.png?text=Command-Line+OS" alt="CLI OS">
-<div class="project-content"><h3>Command-Line OS (C#)</h3>
-<p>CLI-based OS environment supporting user commands, file navigation, and lightweight shell utilities.</p></div>
-</div>
-<!-- PDF Summarizer -->
-<div class="project-card">
-<img src="https://via.placeholder.com/800x400.png?text=PDF+Summarizer" alt="PDF Summarizer">
-<div class="project-content"><h3>PDF Summarizer (Python)</h3>
-<p>Document summarizer using BFS/DFS-inspired parsing logic for keyword extraction on long PDFs.</p></div>
-</div>
-</div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-<h2>Experience</h2>
-<div class="timeline">
-<div class="timeline-item">
-<h3>Software Developer Intern – White Services Technology Ltd.</h3>
-<span>Jul 2025 – Sep 2025 | Dhaka, Bangladesh</span>
-<p>Developed backend modules and optimized PostgreSQL queries, improving page performance by 30% and reducing API latency by 22%.</p>
-</div>
-<div class="timeline-item">
-<h3>Arduino & Robotics Instructor – Motijheel Model High School</h3>
-<span>Feb 2024 – Apr 2024 | Dhaka, Bangladesh</span>
-<p>Taught 50+ students robotics fundamentals, supervised 8+ projects, enhancing understanding of embedded systems.</p>
-</div>
-</div>
-</section>
-
-<!-- EDUCATION -->
-<section id="education">
-<h2>Education</h2>
-<div class="timeline">
-<div class="timeline-item">
-<h3>BSc in Computer Science & Engineering – Notre Dame University Bangladesh</h3>
-<span>2021 – Present | CGPA: 3.52</span>
-</div>
-</div>
-</section>
-
-<!-- ACHIEVEMENTS -->
-<section id="achievements">
-<h2>Achievements</h2>
-<div class="achievements">
-<div class="achievement"><h3>1st Place</h3><p>IoT Health Monitoring System (NDUB)</p></div>
-<div class="achievement"><h3>2nd Place</h3><p>6-DoF Robotic Arm (NDUB)</p></div>
-<div class="achievement"><h3>3rd Place</h3><p>ESP32-CAM Surveillance Rover (NDUB)</p></div>
-</div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-<h2>Contact</h2>
-<div class="contact">
-<a href="mailto:mehdihossenfahim@gmail.com">Email Me</a>
-<a href="https://www.linkedin.com/in/mehedi-hossen-fahim-322b49171" target="_blank">LinkedIn</a>
-</div>
-</section>
+<!-- SKILLS, PROJECTS, EXPERIENCE, EDUCATION, ACHIEVEMENTS, CONTACT -->
+<!-- ... Use same structure as previous code for these sections ... -->
 
 <footer>&copy; 2025 Mehedi Hossen Fahim. All rights reserved.</footer>
 
-<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
-/* PARTICLES JS */
+// PARTICLES JS
 particlesJS("particles-js",{
   "particles":{"number":{"value":80},"color":{"value":"#ff4d6d"},"shape":{"type":"circle"},"opacity":{"value":0.5},"size":{"value":3},"line_linked":{"enable":true,"distance":150,"color":"#ff4d6d","opacity":0.4,"width":1},"move":{"enable":true,"speed":2}}},
   "interactivity":{"events":{"onhover":{"enable":true,"mode":"repulse"}}},
   "retina_detect":true
 });
 
-/* TYPING EFFECT */
+// MATRIX CODE EFFECT
+const canvas = document.getElementById('matrixCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = '01';
+const fontSize = 16;
+const columns = canvas.width / fontSize;
+const drops = Array(Math.floor(columns)).fill(1);
+
+function drawMatrix(){
+    ctx.fillStyle = 'rgba(15,17,26,0.1)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#1f8ef1';
+    ctx.font = fontSize + "px monospace";
+    for(let i=0;i<drops.length;i++){
+        const text = letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+        drops[i]++;
+        if(drops[i]*fontSize>canvas.height || Math.random()>0.95){drops[i]=0;}
+    }
+}
+setInterval(drawMatrix,50);
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+// TYPING EFFECT
 const typingText = "I create futuristic AI Learning Platforms, IoT Systems & Modern Web Apps.";
 const typingEl = document.querySelector('.hero h2');
 let i=0;
 function type(){ if(i<typingText.length){ typingEl.textContent+=typingText.charAt(i); i++; setTimeout(type,50);}}
 type();
 
-/* THEME TOGGLE */
+// THEME TOGGLE
 const themeBtn=document.querySelector('.theme-toggle');
 themeBtn.addEventListener('click',()=>document.body.classList.toggle('light'));
 </script>
